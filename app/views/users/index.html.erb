@@ -1,0 +1,23 @@
+<h2>Welcome, <%= current_user.email %></h2>
+<%# binding.pry %>
+	<% if user_signed_in? %>
+	  <h2>Your Wallet Balance: <%= number_to_currency(current_user.initial_wallet_balance, unit: '₹') %></h2>
+	<% else %>
+	  <p>Please sign in to view your wallet balance.</p>
+	<% end %>
+<h3>Your Loan Requests</h3>
+<% @loans.each do |loan| %>
+  <p>Loan Amount: <%= number_to_currency(loan.amount, unit: '₹') %></p>
+  <p>Loan Status: <%= loan.state %></p>
+  <% if loan.requested? %>
+    <%= link_to 'Confirm', confirm_loan_request_user_path(loan), method: :put %>
+    <%= link_to 'Reject', reject_loan_request_user_path(loan), method: :put %>
+  <% end %>
+  <% if loan.open? %>
+    <%= link_to 'Repay', repay_loan_user_path(loan), method: :put %>
+  <% end %>
+<% end %>
+
+<%#= link_to 'New Loan Request', new_loan_request_user_path %>
+<%= link_to 'New Loan Request', new_loan_request_user_path(current_user) %>
+

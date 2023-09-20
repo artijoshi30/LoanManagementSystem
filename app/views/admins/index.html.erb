@@ -1,0 +1,28 @@
+<h1>Welcome, <%= current_admin.email %></h1>
+
+<h2>Your Wallet Balance: <%= number_to_currency(current_admin.wallet.wallet_balance, unit: '₹') %></h2>
+
+<h3>Loan Requests</h3>
+<% @loan_requests.each do |loan| %>
+  <p>User: <%= loan.user.email %></p>
+  <p>Loan Amount: <%= number_to_currency(loan.amount, unit: '₹') %></p>
+  <p>Loan Status: <%= loan.state %></p>
+  <% if loan.requested? %>
+    <%= link_to 'Approve', approve_loan_request_admin_path(loan), method: :put %>
+    <%= link_to 'Reject', reject_loan_request_admin_path(loan), method: :put %>
+  <% end %>
+<% end %>
+
+<h3>Active Loans</h3>
+<% @active_loans.each do |loan| %>
+  <p>User: <%= loan.user.email %></p>
+  <p>Loan Amount: <%= number_to_currency(loan.amount, unit: '₹') %></p>
+  <p>Loan Status: <%= loan.state %></p>
+<% end %>
+
+<h3>Repaid Loans</h3>
+<% @repaid_loans.each do |loan| %>
+  <p>User: <%= loan.user.email %></p>
+  <p>Loan Amount: <%= number_to_currency(loan.amount, unit: '₹') %></p>
+  <p>Loan Status: <%= loan.state %></p>
+<% end %>

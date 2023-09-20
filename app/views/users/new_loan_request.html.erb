@@ -1,0 +1,15 @@
+<h1>New Loan Request</h1>
+<%= form_for @loan do |f| %>
+  <!-- Form fields go here -->
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+
+  <%= f.label :interest_rate %>
+  <%= f.text_field :interest_rate %>
+
+  <%= f.label :term %>
+  <%= f.text_field :term %>
+
+  <%= f.submit 'Submit Loan Request' %>
+<% end %>
+

@@ -1,0 +1,7 @@
+<h1>Repay Loan</h1>
+
+<p>Total Loan Amount to Repay: <%= number_to_currency(@total_loan_amount, unit: '₹') %></p>
+
+<%= form_with(model: @loan, url: repay_loan_user_path(@loan)) do |form| %>
+  <%= form.submit 'Repay Loan' %>
+<% end %>
